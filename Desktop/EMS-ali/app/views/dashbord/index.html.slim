@@ -1,0 +1,81 @@
+div.container
+	div.row
+		div.col-lg-2.col-md-3.col-sm-3.col-xs-12.dashbord-sidebar
+			div.logo-plus-title
+				= image_tag('logo.png' , class: "logo") 
+				h3.title-color MS-EMB
+				hr
+				h5.welcome Welcome!
+				img.user-pic-dashbord[src="https://pbs.twimg.com/profile_images/639224947051593728/bfo2vfPq.jpg"]
+				br
+				h4.title-color = current_user.full_name
+				h6.title-color 
+					| (
+					= user_role(current_user.role)
+					| )
+				hr
+
+		div.btn-group.panel.col-lg-10.col-md-9.col-sm-9.col-xs-12[style="background-color:  #EDEDED !important;"]
+			h5#dropdown1.menu-dashbord-new.pull-right.dropdown-toggle[data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+				= current_user.full_name
+				span.caret
+			img.user-pic-dashbord-menu.pull-right.dropdown-toggle[data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://pbs.twimg.com/profile_images/639224947051593728/bfo2vfPq.jpg"]
+			ul.dropdown-menu.pull-right
+				li
+					= link_to 'Account Setting' , edit_user_registration_path
+				li
+					= link_to 'Password Change' , edit_user_password_path 
+				li
+					= link_to 'Logout' , destroy_user_session_path , method: :delete ,
+		 				class: "glyphicon glyphicon-log-out "
+
+			div.dropdown
+				smpn#dropdownMenu1.glyphicon.glyphicon-envelope.notefication.pull-right.dropdown-toggle[data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"]
+					- if @alert_count > 0
+						smpn.notif-count
+							= @alert_count
+							span.caret
+					end
+				ul.alerts.pull-right.dropdown-menu[aria-labelledby="dropdownMenu1"]
+					- @alerts.each do |alert|
+						li
+							a
+								= alert
+						li.divider[role="separator"]
+		div.small-graph.col-lg-10.col-md-9.col-sm-9.col-xs-12[style="background-color:  #F7F7F7 !important;"]
+			div.col-lg-3
+				h6[style="color: #73879C"] Orders
+				= column_chart @weekely_orders.group_by_month(:order_received, format: "%B").count ,
+				 height: '200px' ,  colors: ["#1ABB9C"]
+
+			div.col-lg-3
+				h6[style="color: #73879C"] Orders Price
+				= area_chart @weekely_orders.group_by_month(:order_received).maximum(:total),
+				 height: '200px',  colors: ["#1ABB9C"]
+			div.col-lg-3
+				h6[style="color: #73879C"] Other Expences
+				= column_chart Expence.all.group_by_month(:date, format: "%B").maximum(:amount) ,
+				 height: '200px',  colors: ["#1ABB9C"]
+			div.col-lg-3
+				h6[style="color: #73879C"] Purchasing Cost
+				= area_chart Purchasing.group_by_month(:created_at).maximum(:total_bill),
+				height: '200px',  colors: ["#1ABB9C"]
+			div.col-lg-12
+				div.big-graph
+					h3 style="display: inline" Daily Activity
+					h6[style="display: inline"] 
+					| (Each Machine's Stitches Graph )
+					= column_chart Machine.all.map { |machine| {name: machine.name, data: machine.stitches.group_by_day(:date).maximum(:count)}} ,height: '250px' ,  colors: ["#1ABB9C" , "#E90CB5" , "#0D90F5" ,"#533F4C" , "#456849"]
+					/ = line_chart Stitch.group(:'machine_id').group_by_day(:date).maximum(:count),  colors: ["#1ABB9C" , "#E90CB5" , "#0D90F5"] 
+				br
+			div.col-lg-12.big-graph
+				h3 style="display: inline" Daily Activity
+				h6[style="display: inline"] 
+					| (Total Stitches Graph)
+				hr
+				= area_chart Stitch.group_by_day(:date).maximum(:count),height: '250px',  colors: ["#1ABB9C"]		
+			/ div.col-lg-4.big-graph
+			/ 	h6[style="color: #73879C"] Expences
+			/ 	= column_chart Expence.all.group_by_month(:date, format: "%B").maximum(:amount),
+			/ 	 height: '200px' ,  colors: ["#1ABB9C"]
+			/ 	

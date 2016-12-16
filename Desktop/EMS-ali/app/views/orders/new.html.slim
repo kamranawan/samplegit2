@@ -1,0 +1,9 @@
+div.container	
+	div.row
+		div.col-lg-2
+		.col-lg-8
+			legend
+				h1 New order
+			== render 'form'
+
+			= link_to 'Back', orders_path,  class: "btn btn-default  glyphicon glyphicon-circle-arrow-left"

@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @machine.name
+p
+  strong Purchasing date:
+  = @machine.purchasing_date
+p
+  strong Price:
+  = @machine.price
+p
+  strong Model:
+  = @machine.model
+p
+  strong No of heads:
+  = @machine.no_of_heads
+
+= link_to 'Edit', edit_machine_path(@machine)
+'|
+= link_to 'Back', machines_path

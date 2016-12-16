@@ -1,0 +1,60 @@
+div.row
+  div.col-lg-12
+    div.static-img-blur
+      img[src="#{@party_member.avatar_file_name}"] 
+p#notice = notice
+br
+div.container.employ-desc
+  = link_to 'Edit', edit_party_member_path(@party_member) , class: "btn btn-info glyphicon glyphicon-edit"
+  '
+  = link_to 'Back', party_members_path , class: "btn btn-default  glyphicon glyphicon-circle-arrow-left"
+
+  div.row
+    div.col-lg-2
+    div.col-lg-6
+      table.table
+        tbody
+          tr
+            td 
+              p
+                strong Name:
+            td
+              h4
+                = @party_member.name
+          tr
+            td 
+              p
+                strong Party:
+            td
+              h4
+                = @party_member.party.name
+          tr
+            td 
+              p
+                strong Phone#1:
+            td
+              h4
+                = @party_member.phone_1
+          tr
+            td 
+              p
+                strong Phone#2:
+            td
+              h4
+                = @party_member.phone_2
+          tr
+            td 
+              p
+                strong CNIC #:
+            td
+              h4
+                = @party_member.cnic
+          tr
+            td 
+              p
+                strong Address:
+            td
+              h4
+                = @party_member.address
+
+    

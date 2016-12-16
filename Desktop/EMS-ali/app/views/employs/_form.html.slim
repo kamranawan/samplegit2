@@ -1,0 +1,46 @@
+= form_for @employ do |f|
+  - if @employ.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@employ.errors.count, "error")} prohibited this employ from being saved:"
+      ul
+        - @employ.errors.full_messages.each do |message|
+          li = message
+  .field
+    = f.label :Photo , class: "glyphicon glyphicon-paperclip"
+    = f.file_field :avatar
+  .field
+    = f.label :full_name
+    = f.text_field :full_name , class: "form-control"
+  .field
+    = f.label :father_name
+    = f.text_field :father_name , class: "form-control"
+  .field
+    = f.label :dob
+    div.input-group.date#datetimepicker1
+      = f.date_field :dob , class: "form-control"
+      span.input-group-addon.glyphicon.glyphicon-calendar
+  .field
+    = f.label :gender
+    = f.select :gender , {:Male => 0 , :Female => 1} 
+  .field
+    = f.label :phone_1
+    = f.text_field :phone_1 , class: "form-control"
+  .field
+    = f.label :phone_2
+    = f.text_field :phone_2 , class: "form-control"
+  .field
+    = f.label :cnic
+    = f.text_field :cnic , class: "form-control" , placeholder: '35201-1323452-2'
+  .field
+    = f.label :address
+    = f.text_field :address , class: "form-control"
+  .field
+    = f.label :material_status
+    = f.select :material_status  , {:Married => 1 , :Unmarried => 0} 
+  .field
+    = f.label :designation
+    = f.select :designation , ["Clipper","Operator","Guard","Helper","Other"], class: "form-control"
+  .field
+    = f.label :basic_salary
+    = f.number_field :basic_salary , class: "form-control"
+  .actions = f.submit

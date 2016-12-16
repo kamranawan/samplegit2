@@ -1,0 +1,34 @@
+div.container
+	div.row
+		div.col-lg-2
+			= link_to 'Register' , register_path , class: "btn btn-default"
+		div.col-lg-8
+			legend
+				| Attendence
+			= form_tag :attandances ,  method: "get" do
+				= label_tag :Select_date
+				= date_field_tag :attendence_date ,  Date.today
+				br
+				br
+				= submit_tag 'Save Attadance' , class: "btn btn-success attdance-save" 
+				table.table
+					thead
+						th Employ Nmae
+						th Photo
+						th Attadance
+					tbody	
+							- @employs.each do |e|
+								tr
+									td
+										= e.full_name
+									td
+										img.employ-pic-atta[src="#{e.avatar_file_name}"] 					
+									td	
+										= label_tag 'Present'
+										= radio_button_tag :attdence ,'Present' , true , name: "#{e.id}"
+										= label_tag 'Absent'
+										= radio_button_tag :attdence ,'Absent' , false , name: "#{e.id}"
+										= label_tag 'short-leave'
+										= radio_button_tag :attdence ,	'shortleave' , false , name: "#{e.id}"
+
+				

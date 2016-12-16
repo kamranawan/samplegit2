@@ -1,0 +1,71 @@
+div.row
+  div.col-lg-12
+    div.static-img-blur
+      img[src="#{@party.avatar_file_name}"] 
+p#notice = notice
+br
+div.container.employ-desc
+  = link_to 'Edit', edit_party_path(@party) , class: "btn btn-info glyphicon glyphicon-edit"
+  '
+  = link_to 'Back', parties_path , class: "btn btn-default  glyphicon glyphicon-circle-arrow-left"
+  '
+  = link_to 'Delete', @party , data: { confirm: 'Are you sure?' }, method: :delete , class: "btn btn-danger  glyphicon glyphicon-trash"
+br
+  div.row
+    div.col-lg-2
+    div.col-lg-6
+      table.table
+        tbody
+          tr
+            td 
+              p
+                strong Name:
+            td
+              h4
+                = @party.name
+          tr
+            td 
+              p
+                strong Address:
+            td
+              h4
+                = @party.address
+          tr
+            td 
+              p
+                strong Phone#1:
+            td
+              h4
+                = @party.ph_no
+div.container
+  div.row
+    div.col-lg-12
+      h2
+        |  Party Memberes
+    - @party.party_members.each do |party_member|
+      a[href="/party_members/#{party_member.id}"]
+        div.col-lg-3.party_membere-tab
+          div.employ-header
+            h4.text-center 
+              = party_member.name
+            hr
+            div.party-member-pic-area
+              img.employ-pic[src="#{party_member.avatar_file_name}"] 
+            hr
+            h5.text-center
+              strong
+                | Party: 
+              = party_member.party.name
+            hr
+            h5.cnic
+              | Phone# : 
+              = party_member.phone_1
+            h5.address
+              | Address : 
+              = party_member.address
+      br
+
+
+
+
+

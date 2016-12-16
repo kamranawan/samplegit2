@@ -1,0 +1,18 @@
+= form_for @design do |f|
+  - if @design.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@design.errors.count, "error")} prohibited this design from being saved:"
+      ul
+        - @design.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  .field
+    = f.label :code
+    = f.text_field :code, class: "form-control"
+  .field
+    = f.label :photo, class: "glyphicon glyphicon-paperclip"
+    = f.file_field :photo 
+  .actions = f.submit 'Save Design' , class: "btn btn-success"

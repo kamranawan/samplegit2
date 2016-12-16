@@ -1,0 +1,1 @@
+json.partial! "stitches/stitch", stitch: @stitch

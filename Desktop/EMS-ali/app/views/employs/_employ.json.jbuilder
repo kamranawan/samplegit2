@@ -1,0 +1,2 @@
+json.extract! employ, :id, :full_name, :father_name, :dob, :gender, :cnic, :address, :avatar, :material_status, :designation, :basic_salary, :created_at, :updated_at
+json.url employ_url(employ, format: :json)

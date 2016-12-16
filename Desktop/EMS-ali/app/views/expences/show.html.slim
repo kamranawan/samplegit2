@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Amount:
+  = @expence.amount
+p
+  strong Detail:
+  = @expence.detail
+p
+  strong Date:
+  = @expence.date
+p
+  strong User:
+  = @expence.user_id
+
+= link_to 'Edit', edit_expence_path(@expence)
+'|
+= link_to 'Back', expences_path

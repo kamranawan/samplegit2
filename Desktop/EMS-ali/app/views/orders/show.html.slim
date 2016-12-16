@@ -1,0 +1,43 @@
+div.container
+	h4 
+		| Bill ID: 
+		= @order.id	
+	h2 
+		| Party : 
+		= @order.party.name
+	strong
+		p 
+			| order received date : 
+			= @order.order_received
+	strong
+		p 
+			| order delevery date : 
+			= @order.order_delivery_date
+
+	h2 Lots: 
+	
+	table.table.table-striped.table-hover.table-bordered
+		thead.thead
+			th number of lot 
+			th lot rate
+			th design
+		tbody
+			- @order.order_lots.all.each do |o_l|
+				tr
+					td = o_l.number_of_lot
+					td = o_l.lot_rate
+					td = o_l.design.name
+
+	strong
+		p
+			| Total Bill : 
+			= @order.total
+	strong
+		p
+			| Advance  : 
+			= @order.advance
+	strong
+		p
+			| Balance : 
+			= @order.balance
+	= link_to 'Back' , orders_path , class: "glyphicon glyphicon-backward btn btn-default"

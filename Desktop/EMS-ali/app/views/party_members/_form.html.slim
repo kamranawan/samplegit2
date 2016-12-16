@@ -1,0 +1,29 @@
+= form_for @party_member do |f|
+  - if @party_member.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@party_member.errors.count, "error")} prohibited this party_member from being saved:"
+      ul
+        - @party_member.errors.full_messages.each do |message|
+          li = message
+  .field
+    = f.label :avatar
+    = f.file_field :avatar
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :phone_1
+    = f.text_field :phone_1
+  .field
+    = f.label :phone_2
+    = f.text_field :phone_2
+  .field
+    = f.label :cnic
+    = f.text_field :cnic
+  .field
+    = f.label :address
+    = f.text_field :address
+  .field
+    = f.label :party_id
+    = f.collection_select(:party_id ,Party.all , :id , :name   )  
+  .actions = f.submit

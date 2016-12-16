@@ -1,0 +1,31 @@
+div.container
+  = link_to 'New Machine', new_machine_path , class: "glyphicon glyphicon-plus-sign btn btn-default"
+  h1 Machines
+
+  table.table.table-striped.table-hover.table-bordered
+    thead.thead
+      tr
+        th Name
+        th Purchasing date
+        th Price
+        th Model
+        th No of heads
+        th
+        th
+        th
+
+    tbody
+      - @machines.each do |machine|
+        tr
+          td = machine.name
+          td = machine.purchasing_date
+          td = machine.price
+          td = machine.model
+          td = machine.no_of_heads
+          td = link_to 'Show', machine , class: "btn btn-info"
+          td = link_to 'Edit', edit_machine_path(machine) ,class: "btn btn-default"
+          td = link_to 'Destroy', machine, data: { confirm: 'Are you sure?' }, method: :delete , class: "btn btn-danger"
+
+  br
+
+  

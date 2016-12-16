@@ -1,0 +1,23 @@
+= form_for @purchasing do |f|
+  - if @purchasing.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@purchasing.errors.count, "error")} prohibited this purchasing from being saved:"
+      ul
+        - @order.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :supplier_id
+    = f.collection_select(:supplier_id , Supplier.all , :id , :name)
+  h5 Purchasing Items 
+  div.purchase_items
+    = f.simple_fields_for :purchase_items do |purchase_item|
+      = render 'purchase_item_fields' , f: purchase_item
+  div.links
+    = link_to_add_association 'Add-item' , f , :purchase_items , class: "glyphicon glyphicon-plus btn btn-success"
+    .field
+      = f.label :total_bill
+      = f.number_field :total_bill , class: "form-control"
+
+  .actions 
+    = f.submit 'Save Purchasing' , class: "btn btn-info"

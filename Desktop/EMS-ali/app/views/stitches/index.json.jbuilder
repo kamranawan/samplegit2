@@ -1,0 +1,1 @@
+json.array! @stitches, partial: 'stitches/stitch', as: :stitch

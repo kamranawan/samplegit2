@@ -1,0 +1,63 @@
+div.row
+	div.col-lg-2.col-2
+	div.col-lg-8.col-8
+		- if flash[:notice]
+			p.alert.alert-success = flash[:notice]
+div.container
+	div.row
+		div.col-sm-8.upbutton
+			= link_to 'Todays Attadance' , attandances_path , class: "btn btn-default mar-right"
+			= link_to "Prev-Month", register_path(:page => @pre),class: "btn btn-info mar-right  	glyphicon glyphicon-backward"
+			strong.glyphicon.glyphicon-calendar
+				= @date.strftime( "%h-%Y")
+		div.col-sm-4
+			label
+				| &nbsp; Present &nbsp; 
+			span.glyphicon.glyphicon.glyphicon-ok.border-gud 	
+			label
+				| &nbsp;| &nbsp; Absent &nbsp; 
+			span.glyphicon.glyphicon-remove.border-cross
+			label
+				| &nbsp; | &nbsp; Short Leave &nbsp; 
+			spam.glyphicon.glyphicon-asterisk.border-short	
+
+				
+	div.row
+		div.col-sm-2.col-2
+			table.table
+				thead
+					th Nmae
+					th Photo
+					th 
+				tbody
+					- @employs.each do |e|
+						tr
+							td
+								= e.full_name
+							td
+								img.employ-pic-atta[src="#{e.avatar_file_name}"]
+
+								
+		div.col-sm-10.col-10
+			table.table[border="1"]
+				thead
+					- (1..@date.day).each do |day|
+						th = day
+					tbody
+						- @employs.each do |e|
+							tr
+								- i = 0
+								- (1..@date.day).each do |d|
+									td 
+										- if @this_month[i] && @this_month[i].attendence_date.day == d
+											- if @this_month[i].employ_ids.include? "(#{e.id},Present)" 
+												span.glyphicon.glyphicon.glyphicon-ok.border-gud
+											- elsif @this_month[i].employ_ids.include? "(#{e.id},Absent)"
+												span.glyphicon.glyphicon-remove.border-cross
+											-elsif @this_month[i].employ_ids.include? "(#{e.id},shortleave)"
+												span.glyphicon.glyphicon-asterisk.border-short
+											- else
+												span.glyphicon.glyphicon-minus.border-not	
+											- i += 1
+										- else
+											span.glyphicon.glyphicon-minus.border-not	

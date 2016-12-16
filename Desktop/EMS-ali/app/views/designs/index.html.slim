@@ -1,0 +1,22 @@
+div.container
+  = link_to 'New Design', new_design_path , class: "glyphicon glyphicon-plus-sign btn btn-default"
+  br
+  div.row
+    - @designs.each do |design|
+      div.col-lg-3
+        div.employ-header
+          = image_tag design.photo.url(:thumb) , class: "design-pic"
+          hr
+          p
+            strong Name: 
+            = design.name
+            strong Code:                
+            = design.code
+          hr
+          = link_to 'Show', design , class: "btn btn-info btn-xs"
+          |
+          = link_to 'Edit', edit_design_path(design) , class: "btn btn-default btn-xs"
+          |
+          = link_to 'Destroy', design, data: { confirm: 'Are you sure?' }, method: :delete , class: "btn btn-danger btn-xs"
+
+br

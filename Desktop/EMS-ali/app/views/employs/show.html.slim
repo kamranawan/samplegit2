@@ -1,0 +1,104 @@
+div.row
+  div.col-lg-12
+    div.static-img-blur
+      img[src="#{@employ.avatar_file_name}"] 
+p#notice = notice
+br
+div.container.employ-desc
+  = link_to 'Edit', edit_employ_path(@employ) , class: "btn btn-info glyphicon glyphicon-edit"
+  '
+  = link_to 'Back', employs_path , class: "btn btn-default  glyphicon glyphicon-circle-arrow-left"
+
+  div.row
+    div.col-lg-2
+    div.col-lg-6
+      table.table
+        tbody
+          tr
+            td 
+              p
+                strong Name:
+            td
+              h4
+                = @employ.full_name
+          tr
+            td 
+              p
+                strong Father's name:
+            td
+              h4
+                = @employ.father_name
+          tr
+            td 
+              p
+                strong Designation:
+            td
+              h4
+                = @employ.designation
+          tr
+            td 
+              p
+                strong.glyphicon.glyphicon-earphone Phone#1:
+            td
+              h4
+                = @employ.phone_1
+          tr
+            td 
+              p
+                strong.glyphicon.glyphicon-phone-alt Phone#2:
+            td
+              h4
+                = @employ.phone_2
+          tr
+            td 
+              p
+                strong Date of Birth:
+            td
+              h4
+                = @employ.dob
+          tr
+            td 
+              p
+                strong Gender:
+            td
+              h4
+                - if @employ.gender
+                  | Male
+                -else
+                  | Female
+          tr
+            td 
+              p
+                strong Date of Birth:
+            td
+              h4
+                = @employ.dob
+          tr
+            td 
+              p
+                strong CNIC #:
+            td
+              h4
+                = @employ.cnic
+          tr
+            td 
+              p
+                i.fa.fa-address-card-o[aria-hidden="true"]
+                strong Address:
+            td
+              h4
+                = @employ.address
+          tr
+            td 
+              p
+                strong Material status:
+            td
+              h4
+                = @employ.material_status
+          tr
+            td 
+              p
+                strong Basic Salary:
+            td
+              h4
+                = @employ.basic_salary

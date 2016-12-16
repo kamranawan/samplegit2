@@ -1,0 +1,23 @@
+= form_for @stitch do |f|
+  - if @stitch.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@stitch.errors.count, "error")} prohibited this stitch from being saved:"
+      ul
+        - @stitch.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :date
+    div.input-group.date#datetimepicker
+      = f.datetime_field :date , class: "form-control"
+      span.input-group-addon.glyphicon.glyphicon-calendar
+  
+  .field
+    = f.label :machine
+    = f.collection_select(:machine_id , Machine.all , :id , :name)
+    = f.label :design
+    = f.collection_select(:design_id , Design.all , :id , :name) 
+  .field
+    = f.label :count
+    = f.number_field :count , class: "form-control"
+  .actions = f.submit 'Enter Stitches' , class: "btn btn-success"

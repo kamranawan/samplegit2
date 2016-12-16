@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @design.name
+p
+  strong Code:
+  = @design.code
+p
+  strong Photo:
+  = @design.photo
+
+= link_to 'Edit', edit_design_path(@design)
+'|
+= link_to 'Back', designs_path

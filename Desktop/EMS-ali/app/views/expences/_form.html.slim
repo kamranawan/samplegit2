@@ -1,0 +1,18 @@
+= form_for @expence do |f|
+  - if @expence.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@expence.errors.count, "error")} prohibited this expence from being saved:"
+      ul
+        - @expence.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :amount
+    = f.number_field :amount, class: "form-control"
+  .field
+    = f.label :detail
+    = f.text_field :detail, class: "form-control"
+  .field
+    = f.label :date
+    = f.date_select :date, class: "form-control"
+  .actions = f.submit

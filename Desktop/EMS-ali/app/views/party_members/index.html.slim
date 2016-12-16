@@ -1,0 +1,34 @@
+div.container
+  div.row
+    div.col-lg-12
+      = link_to 'New Party member', new_party_member_path , class: "glyphicon glyphicon-plus-sign btn btn-default"
+      h2
+        |  Party Memberes
+    - @party_members.each do |party_member|
+      a[href="party_members/#{party_member.id}"]
+        div.col-lg-3.party_membere-tab
+          div.employ-header
+            h4.text-center 
+              = party_member.name
+            hr
+            div.party-member-pic-area
+              img.employ-pic[src="#{party_member.avatar_file_name}"] 
+            hr
+            h5.text-center
+              strong
+                | Party: 
+              = party_member.party.name
+            hr
+            h5.cnic
+              | Phone# : 
+              = party_member.phone_1
+            h5.address
+              | Address : 
+              = party_member.address
+      br
+  = paginate @party_members, :theme => 'twitter-bootstrap-3',:pagination_class => "pagination-sm"
+
+
+
+
+

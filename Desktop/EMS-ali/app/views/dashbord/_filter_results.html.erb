@@ -1,0 +1,10 @@
+<%= form_tag dashbord_path, :method => 'get' %>
+   <br>
+   <%= date_field_tag :time_start, params[:time_start] , :placeholder => "From", class: "  form-control" %>
+    <br>
+    <%= date_field_tag :time_start, params[:time_start] , :placeholder => "To", class: "  form-control" %>
+
+
+<br>
+<%=  submit_tag "Submit" , class: "btn btn-info" %>
+

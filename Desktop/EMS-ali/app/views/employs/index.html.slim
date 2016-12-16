@@ -1,0 +1,29 @@
+div.container
+  div.row
+    div.col-lg-12
+      = link_to 'Add New Employ', new_employ_path , class: "glyphicon glyphicon-plus-sign btn btn-default"
+      h2
+        | All Employes
+    - @employs.each do |employ|
+      a[href="employs/#{employ.id}"]
+        div.col-lg-3.employe-tab
+          div.employ-header
+            h4.text-center 
+              = employ.full_name
+            hr
+            div.employ-pic-area
+              img.employ-pic[src="#{employ.avatar_file_name}"] 
+            hr
+            h5.text-center
+              = employ.designation
+            hr
+            h5.cnic
+              spam.glyphicon.glyphicon-earphone
+                | Phone# : 
+              = employ.phone_1
+            h5.address
+              i.fa.fa-address-card-o[aria-hidden="true"]
+              | Address : 
+              = employ.address
+      br
+  = paginate @employs, :theme => 'twitter-bootstrap-3',:pagination_class => "pagination-sm"

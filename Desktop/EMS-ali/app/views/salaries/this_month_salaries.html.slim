@@ -1,0 +1,81 @@
+div.container
+  div.row
+    div.col-lg-4
+      = link_to 'Detail Each Employ Account' , salaries_path , class: "btn btn-default"
+    div.col-lg-8
+      strong.glyphicon.glyphicon-calendar
+        = Date.today.strftime( "%h-%Y")
+    hr
+    div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+      table.table.table-striped.table-hover.table-bordered
+        thead.thead
+          th Employ Nmae
+          th Photo
+          th Basic Salary
+          th Working Days
+          th Current Salary(Rs)
+          th Sunday
+          th Over Time
+          th Bounas
+          th Gross Salary
+          th Hotel
+          th Advance
+          th Net salary
+          th Payment Delivered
+        tbody 
+            - Employ.all.each do |e|
+              tr
+                td
+                  = e.full_name
+                td
+                  img.employ-pic-atta[src="#{e.avatar_file_name}"]
+                td  
+                  = e.basic_salary
+                td
+                  = e.attendance_count
+                td
+                  = e.current_salary(e.attendance_count)
+                td
+                  = e.sunday_count
+                td
+                  = e.over_time(e.sunday_count)
+                / td.click-bouns[data-toggle="modal" data-target="#myModal"]
+                td
+                  = e.bouns_this_month(e.id)
+                td
+                  = e.gross_salary( e.current_salary(e.attendance_count), e.over_time(e.sunday_count) , e.id) 
+                td
+                  = e.hotel_payment(e.id)
+                td
+                  = e.advance_payment(e.id)
+                td
+                  = e.gross_salary( e.current_salary(e.attendance_count), e.over_time(e.sunday_count) , e.id) - e.hotel_payment(e.id) - e.advance_payment(e.id)
+                td
+                  = e.delivered_payment(e.id)       
+
+
+
+
+
+  / <div class=" modal fade" id="myModal" role="dialog">
+  /   <div class="modal-dialog">
+    
+  /     <!-- Modal content-->
+  /     <div class="modal-content">
+  /       <div class="modal-header">
+  /         <button type="button" class="close" data-dismiss="modal">&times;</button>
+  /         <h4 class="modal-title">Bounas</h4>
+  /       </div>
+  /       <div class="modal-body">
+  /         = form_tag salaries_path, :method => 'get'
+  /           = text_field_tag :bouns , "" , class: "form-control" , placeholder:"Enter Bounas"
+  /           br
+  /           = submit_tag 'Save' , class: "btn btn-success"
+  /       </div>
+  /       <div class="modal-footer">
+  /         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  /       </div>
+  /     </div>
+      
+  /   </div>
+  / </div>

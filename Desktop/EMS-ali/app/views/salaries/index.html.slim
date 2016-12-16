@@ -1,0 +1,36 @@
+div.container
+  = link_to 'New salary', new_salary_path , class: "glyphicon glyphicon-plus-sign btn btn-default"
+  h1 salaryes
+  
+  table.table.table-striped.table-hover.table-bordered
+    thead.thead
+      tr
+        th Employ name
+        th Photo
+        th bounas
+        th hotel
+        th advance
+        th salary_recevied
+        th
+        th
+        th
+
+    tbody
+      -  @salaries.each do |salary|
+        tr
+          td = salary.employ.full_name
+          td 
+            img.employ-pic-atta[src="#{salary.employ.avatar_file_name}"]
+          td = salary.bounas
+          td = salary.hotel
+          td = salary.advance
+          td = salary.salary_recevied
+          td = link_to 'Show', salary , class: "btn btn-primary btn-sm"
+          td = link_to 'Edit', edit_salary_path(salary), class: "btn btn-info btn-sm"
+          td = link_to 'Destroy', salary, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger btn-sm"
+
+  br
+
+  -if @salaryes
+    = paginate @salaryes, :theme => 'twitter-bootstrap-3',:pagination_class => "pagination-sm"
+  end

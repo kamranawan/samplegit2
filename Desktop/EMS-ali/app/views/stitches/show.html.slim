@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Date:
+  = @stitch.date
+p
+  strong Count:
+  = @stitch.count
+p
+  strong Machine:
+  = @stitch.machine
+p
+  strong User:
+  = @stitch.user
+p
+  strong Design:
+  = @stitch.design
+
+= link_to 'Edit', edit_stitch_path(@stitch)
+'|
+= link_to 'Back', stitches_path
